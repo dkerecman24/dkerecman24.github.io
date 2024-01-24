@@ -1,1 +1,126 @@
-# dkerecman24.github.io
+
+<!DOCTYPE html>
+<!-- saved from url=(0115)https://tutorials.nmdprojects.net/js_build_web_cards_from_data_2/related_files/js_build_cards_from_json_START.html# -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<style id="local-style">
+	/* Based on outline-styles-v1.6.*/
+	body {
+		font-family: verdana ;
+		margin: 3em 3em ;
+		color: dimgray ;
+	}
+	a {
+		color: tomato ;
+	}
+	h1 {
+		font-variant: small-caps ;
+		font-size: 1.5em ;
+		color: rgb(100%, 75%, 25% ) ;
+	}
+	#device {
+		width: 414px ;
+		height: 896px ;
+		border: peru solid 2px ;
+		border-radius: 10px ;
+		padding: 20px ;
+		background-color: palegoldenrod ;
+	}
+	.card {
+		background-color: lightyellow ;
+		border-radius: 10px ;
+		padding: 1em ;
+		margin-bottom: 20px ;
+	}
+	img {
+		width: 100px ;
+		float: left;
+		margin: 0 1em .5em 0;
+	}
+</style>
+<script id="local-json">
+	// To embed JSON in an HTML file like this requires that you set it equal to a variable.
+	cardsJSON = [
+		// 1. Paste your sample JSON objects, i.e. what's inside the [] brackets, below.
+		{
+       "artist": "Dance Gavin Dance",
+        "album_name": "People You Knew / Perfect",
+        "song_name": "Perfect"
+        },
+        {
+            "artist":"Loathe",
+            "album_name": "I Let It in and It Took Everything",
+            "song_name": "Is It Really You?"
+        },
+        {
+            "artist": "Title Fight",
+            "album_name": "Floral Green",
+            "song_name": "Head in the Ceiling Fan"
+        },
+        {
+            "artist": "Vacations",
+            "album_name": "Forever in Bloom",
+            "song_name": "Take Care"
+        },
+        {
+            "artist": "SALES",
+            "album_name": "SALES - EP",
+            "song_name": "Toto"
+        }     
+	   ] ;
+</script>
+<script id="DK-records_sample.JSON">
+	// 8.	Now let's switch to external JSON. Upload your JSON file to a folder on your server
+	//		and upload this HTML file to the same folder.
+	// 9.	To load your JSON in an external file, we'll overwrite the local JSON above.
+	// 		First add a word to the following line that says this function will operate asynchronously.
+	buildCardsFromData = () => {
+		// 10.	Put the word "await" before any command that requires waiting for data to load.
+		// 11.	Fetch the JSON file name you used above (must be in the same folder).
+		// let response = _____ fetch(______________) ;
+		// 12.	Add a method that converts the response to JSON. Make this call asynchronous too.
+		// let cardsJSON = _____ response.____() ;
+		// From here down, everything is client-side, so we don't need the "await" keyword anymore.
+		// We'll make cards from each item in our cardsJSON array.
+		// Below is a quick-and-dirty way to make divs from your JSON,
+		// just by loading HTML tags into a big string variable.
+		// 3.	Fill in the iterator that creates one array from another.
+		cardsHTML = cardsJSON.map(
+			card => {
+				// 4	Add the punctuation marks that enclose a string template.
+				// 5.	Also fill in four of the labels (keys) from your sample JSON records.
+				// 		(You may not use all of your keys.)
+				// <img src="${card["https://assets.vogue.com/photos/613fdb4d7c3d8987280eb4b6/1:1/w_2403,h_2403,c_limit/GettyImages-1340132528.jpg"]}" />
+				return (
+					`<div class="card">
+						<h4>${card["artist"]}</h4>
+						<h5>${card["album_name"]}</h5>
+						<p>${card["song_name"]}</p>
+					</div>`
+				)
+			} 
+		) ;
+		// 6.	Log the result in the console to make sure our JSON is converting to HTML correctly.
+		// 		You'll see weird line breaks because of the way we formatted our text above.
+		console.log(  `cardsHTML is ${cardsHTML}` ) ;
+		// Now we will just add each of these cards to our container.
+		// 7. Fill in the method that adds HTML content inside a tag.
+		cardsHTML.forEach(
+			card => {
+				document.getElementById("device").innerHTML += card ;
+			}
+		) ;
+	} ;
+	// Note that we are not checking for errors in the server connection.
+	// To do that, we could add this to the call in our link below.
+	// buildCardsFromData().catch( error => console.log(error) ) ;
+</script>
+</head>
+<body>
+<h1>Basic Fetch Demo</h1>
+<!-- 2. Add an event listener that calls our function above when clicked. -->
+<p><a href="https://tutorials.nmdprojects.net/js_build_web_cards_from_data_2/related_files/js_build_cards_from_json_START.html#" onclick="buildCardsFromData(); return false;">Build cards</a></p>
+<p id="device"></p>
+
+
+</body></html>
